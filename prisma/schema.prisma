@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model GrandPrix {
+  id         String   @id @default(uuid())
+  name       String // @db.VarChar(150)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  grandPrixSeason GrandPrixSeason[]
+
+  @@map("grand_prix")
+}
+
+model Season {
+  id              String            @id @default(uuid())
+  year            Int
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @default(now())
+
+  grandPrixSeason GrandPrixSeason[]
+  teamDrivers     TeamDrivers[]
+
+  @@map("seasons")
+}
+
+model GrandPrixSeason {
+  id            String    @id @default(uuid())
+  grand_prix_id String
+  season_id     String
+
+  grandPrix     GrandPrix @relation(fields: [grand_prix_id], references: [id])
+  season        Season    @relation(fields: [season_id], references: [id])
+  events        Events[]
+
+  @@map("grand_prix_season")
+}
+
+model Events {
+  id                   String          @id @default(uuid())
+  grand_prix_season_id String
+  name                 String // @db.VarChar(150)
+  start_at             DateTime
+  created_at           DateTime        @default(now())
+  updated_at           DateTime        @default(now())
+
+  grandPrixSeason      GrandPrixSeason @relation(fields: [grand_prix_season_id], references: [id])
+
+  @@map("events")
+}
+
+model Drivers {
+  id         String   @id @default(uuid())
+  name       String // @db.VarChar(150)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  teamDrivers TeamDrivers[]
+
+  @@map("drivers")
+}
+
+model Teams {
+  id         String   @id @default(uuid())
+  name       String // @db.VarChar(150)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  teamDrivers TeamDrivers[]
+
+  @@map("teams")
+}
+
+model TeamDrivers {
+  id         String   @id @default(uuid())
+  team_id    String
+  driver_id  String
+  season_id  String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  teams   Teams   @relation(fields: [team_id], references: [id])
+  drivers Drivers @relation(fields: [driver_id], references: [id])
+  season  Season  @relation(fields: [season_id], references: [id])
+
+  @@map("team_drivers")
+}
