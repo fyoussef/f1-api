@@ -14,4 +14,4 @@ app.use(express.json());
 app.use("/api", TeamsRouter, DriversRouter, GrandPrixRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.listen(3000, () => `✔ Server is running!`);
+app.listen(3000, () => console.log(`✔ Server is running!`));
