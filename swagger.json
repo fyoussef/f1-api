@@ -5,9 +5,9 @@
     "description": "Documentation about F1 API",
     "version": "1.0.0"
   },
-  "basePath": "/api",
+  "basePath": "/",
   "paths": {
-    "/teams": {
+    "/api/teams": {
       "get": {
         "parameters": [
           {
@@ -23,7 +23,7 @@
         ]
       }
     },
-    "/drivers": {
+    "/api/drivers": {
       "get": {
         "parameters": [
           {
@@ -49,7 +49,7 @@
         ]
       }
     },
-    "/grand-prix": {
+    "/api/grand-prix": {
       "get": {
         "parameters": [
           {
