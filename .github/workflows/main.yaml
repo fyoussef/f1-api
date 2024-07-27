@@ -1,0 +1,23 @@
+name: F1 API CI
+
+on:
+  pull_request: 
+    branches: ['main']
+  push: 
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22.5.1
+      - name: run install and build
+        run: |
+          npm install
+          npm run build
+      
