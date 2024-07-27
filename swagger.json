@@ -1,0 +1,64 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "F1 API",
+    "description": "Documentation about F1 API",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/teams": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "season",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/drivers": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "season",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "teamId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "teamName",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/grand-prix": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "season",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
+}
